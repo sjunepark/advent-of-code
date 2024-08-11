@@ -10,9 +10,6 @@ watch day="":
 watch-all:
     just watch
 
-lint day:
-    cargo clippy --all-features
-
 test-watch day="" name="":
     cargo watch -q -c \
     {{if day != "" {"-w day-" + day} else {""} }} \
@@ -23,3 +20,8 @@ test day="" name="":
     {{if day != "" {"-p day-" + day} else {""} }} \
     {{if name != "" {name} else {""} }} \
     -- --nocapture
+
+check:
+    cargo fmt --all
+    cargo clippy --all-features
+    cargo check --all-features
