@@ -1,11 +1,10 @@
 default:
     just --list
 
-watch day="":
+watch day="" part="":
     cargo watch -q -c \
     {{if day != "" {"-w day-" + day} else {""} }} \
-    -x 'check --all-features' \
-    -s "just test {{day}}"
+    -s "just test {{day}} {{part}}"
     -x 'fmt --all -- --check'
 
 watch-all:
@@ -14,7 +13,7 @@ watch-all:
 lint day:
     cargo clippy --all-features
 
-test day="" part="":
+test day="" name="":
     cargo test --all-features \
     {{if day != "" {"-p day-" + day} else {""} }} \
-    {{if part != "" {"--bin part" + part} else {""} }}
+    {{if name != "" {name} else {""} }}

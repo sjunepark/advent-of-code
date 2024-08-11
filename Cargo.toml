@@ -1,3 +1,7 @@
 [workspace]
 resolver = "2"
 members = ["day-template", "day-01"]
+
+[workspace.dependencies]
+nom = "7.1.3"
+rstest = "0.22.0"

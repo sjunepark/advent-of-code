@@ -1,11 +1,7 @@
-fn main() {
-    println!("Part 1");
-}
+use day_01::parse;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn test_part1() {
-        println!("Part 1");
-    }
+fn main() {
+    let file = include_str!("./input1.txt");
+    let result = parse(file);
+    println!("{:?}", result);
 }
