@@ -1,9 +1,20 @@
-pub fn parse(_input: &str) -> u32 {
-    unimplemented!()
+use nom::InputIter;
+
+pub fn parse(input: &str) -> usize {
+    input.lines().map(parse_line).sum()
 }
 
-fn parse_line(_line: &str) -> u32 {
-    unimplemented!()
+fn parse_line(line: &str) -> usize {
+    let mut digits = line.iter_elements().flat_map(|c| c.to_digit(10));
+
+    let first = digits.next().unwrap();
+    let last = digits.last().unwrap_or(first);
+
+    let result = format!("{}{}", first, last).parse::<usize>().unwrap();
+    // Check that the result is a two-digit number
+    assert!(result >= 10);
+    assert!(result <= 99);
+    result
 }
 
 #[cfg(test)]
