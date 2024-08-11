@@ -13,6 +13,11 @@ watch-all:
 lint day:
     cargo clippy --all-features
 
+test-watch day="" name="":
+    cargo watch -q -c \
+    {{if day != "" {"-w day-" + day} else {""} }} \
+    -s "just test {{day}} {{name}}"
+
 test day="" name="":
     cargo test --all-features \
     {{if day != "" {"-p day-" + day} else {""} }} \
